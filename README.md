@@ -1,7 +1,7 @@
 # 🧠 Comprehensive AI-Powered Retail Analytics System
 **Multi agent to power enterprise AI like - Accenture AI**
 
-Check out the deployed webpage - https://nishant-accenture-agent.streamlit.app/
+Check out the deployed webpage - https://mansishah-accenture-agent.streamlit.app/
 
 ---
 
@@ -121,3 +121,4 @@ Natural language → LLM interpretation → Pandas code generation → Result di
 - Add **voice interface** for accessibility  
 - Enable **graph analytics** for supply chain modeling  
 - **Cloud deployment** with persistent user sessions  
+
