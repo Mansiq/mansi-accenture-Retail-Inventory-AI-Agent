@@ -402,9 +402,10 @@ def initialize_interactive_display():
                 st.info("Interactive display for agent reasoning. Run a query to see the agents' thinking processes.")
                 st.markdown(
                 """
-                <iframe src="https://drive.google.com/file/d/1a6zQ6cVRae_CBjHOHBRcJWelFMi3p_Mg/preview"
+                <iframe src="https://drive.google.com/file/d/1lBTGnoJFGPDQjtLqnHvyI4kN7wllZb5A/preview"
                         width="100%" height="700px" style="border:none;">
                 </iframe>
                 """,
                 unsafe_allow_html=True
+
 )
