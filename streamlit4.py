@@ -6,6 +6,7 @@ from llama_index.core.agent import ReActAgent
 from llama_index.llms.groq import Groq
 from llama_index.core import PromptTemplate
 from llama_index.core.memory import ChatMemoryBuffer
+import streamlit as st
 
 
 chat_memory = ChatMemoryBuffer.from_defaults(token_limit=2048)
@@ -495,3 +496,4 @@ with right_col:
 # Footer
 st.markdown("---")
 st.markdown("© 2025 Accenture Retail Analytics Agent | Built by - Nishant - NIT SURAT | Email - nishant0363@gmail.com | Contact - 9306145426 ")
+
