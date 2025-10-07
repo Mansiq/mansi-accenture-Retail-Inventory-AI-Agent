@@ -275,7 +275,7 @@ def parse_agent_output(output):
     return output.strip()
     
 # Set page configuration
-st.set_page_config(layout="wide", page_title="Nishant-Accenture Analytics Dashboard")
+st.set_page_config(layout="wide", page_title="Mansi-Shah-Accenture Analytics Dashboard")
 
 agent1 = ReActAgent.from_tools(tools, llm=llm1, verbose=True)
 agent2 = ReActAgent.from_tools(tools, llm=llm2, verbose=True)
@@ -354,10 +354,10 @@ with left_col:
     with chat_container:
         st.info(
             """
-            I am a **Multi-AI Agent** developed by **Nishant (NIT Surat)**,  
+            I am a **Multi-AI Agent** developed by **Mansi Shah (NIT Surat)**,  
             currently participating in the **Accenture AI Hackathon**. I have knowledge of the following attached datasets. I would be glad to help you!
             **Project Report:**  
-            [View Report on Google Drive](https://drive.google.com/file/d/1a6zQ6cVRae_CBjHOHBRcJWelFMi3p_Mg/view?usp=sharing)
+            [View Report on Google Drive](https://drive.google.com/file/d/1lBTGnoJFGPDQjtLqnHvyI4kN7wllZb5A/view?usp=sharing)
             """
         )
 
@@ -495,5 +495,6 @@ with right_col:
 
 # Footer
 st.markdown("---")
-st.markdown("© 2025 Accenture Retail Analytics Agent | Built by - Nishant - NIT SURAT | Email - nishant0363@gmail.com | Contact - 9306145426 ")
+st.markdown("© 2025 Accenture Retail Analytics Agent | Built by - Mansi Shah - NIT SURAT | Email - mansishah9865@gmail.com ")
+
 
