@@ -49,7 +49,8 @@ This enhances explainability by showing step-by-step reasoning and tool usage.
 
 - `demand_forecasting.csv` – Sales transactions across time and regions  
 - `inventory_monitoring.csv` – Stock levels and supply chain status  
-- `pricing_optimization.csv` – Historical pricing and promotional effects  
+- `pricing_optimization.csv` – Historical pricing and promotional effects
+-  `sample_market_data_report.pdf` – Market intelligence report containing company performance, revenue growth, market capitalization, technology sector trends, market indicators, and risk analysis (used for RAG-based document question answering)
 
 ---
 
