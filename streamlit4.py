@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+from llama_index.core import (SimpleDirectoryReader, VectorStoreIndex, Settings)
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.experimental.query_engine import PandasQueryEngine
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import ReActAgent
@@ -11,13 +13,27 @@ import streamlit as st
 
 chat_memory = ChatMemoryBuffer.from_defaults(token_limit=2048)
 
-llm1 = Groq(model="gemma2-9b-it", api_key = st.secrets["llm_key"])
-llm2 = Groq(model="llama3-70b-8192", api_key= st.secrets["llm_key"])
+llm1 = Groq(model="llama-3.1-8b-instant", api_key = st.secrets["llm_key"])
+llm2 = Groq(model="llama-3.3-70b-versatile", api_key = st.secrets["llm_key"])
+
+Settings.embed_model = HuggingFaceEmbedding(
+    model_name="BAAI/bge-small-en-v1.5"
+)
+
 
 specific_products_df = pd.read_csv("data/demand_forecasting.csv")
 inventory_audits = pd.read_csv("data/inventory_monitoring.csv")
 pricing_and_market_data = pd.read_csv("data/pricing_optimization.csv")
 
+documents = SimpleDirectoryReader(
+    input_files=[
+        "data/sample_market_data_report.pdf"
+    ]
+).load_data()
+
+market_index = VectorStoreIndex.from_documents(
+    documents
+)
 
 
 instruction_str = """\
@@ -148,6 +164,26 @@ new_prompt = PromptTemplate(
 pricing_and_market_performance_query_engine = PandasQueryEngine(df=pricing_and_market_data, verbose=True, instruction_str=instruction_str, llm=llm2 )
 pricing_and_market_performance_query_engine.update_prompts({"pandas_prompt": new_prompt})
 
+market_query_engine = market_index.as_query_engine(
+    llm=llm2,
+    similarity_top_k=3
+)
+
+market_rag_tool = QueryEngineTool(
+    query_engine=market_query_engine,
+    metadata=ToolMetadata(
+        name="market_report_rag_tool",
+        description=(
+            "Use this tool to answer questions from the Market Data Report PDF. "
+            "The report contains information about company performance, "
+            "revenue growth, market capitalization, market indicators, "
+            "sector analysis, and market risks. "
+            "Use this tool when the question requires information from the PDF."
+        ),
+    ),
+)
+
+
 from llama_index.core.tools import FunctionTool
 import os
 
@@ -212,6 +248,30 @@ tools = [
            [Storage Cost: The cost of storing the product in a warehouse. Example values are 6.72, 8.38, 3.86],
            [Elasticity Index: A measure of how demand responds to changes in price. Example values are 1.78, 1.67, 2.46]           
             """,
+        ),
+    ),
+
+        QueryEngineTool(
+        query_engine=market_query_engine,
+        metadata=ToolMetadata(
+            name="market_report_rag_data",
+            description="""
+            Use this tool to answer questions from the Market Data Report PDF.
+
+            The report contains information about:
+            - Company revenue
+            - Revenue growth
+            - Market capitalization
+            - Technology-sector indicators
+            - Cloud computing
+            - AI software
+            - Semiconductor performance
+            - Sector analysis
+            - Market risks
+
+            Use this tool when the user's question requires information
+            from the market report PDF.
+            """
         ),
     ),
 ]

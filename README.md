@@ -70,8 +70,8 @@ This enhances explainability by showing step-by-step reasoning and tool usage.
 ## 🧠 LLM Selection
 
 ### Ideal LLMs Used
-- **Groq llama3-70b** – For complex reasoning and comprehension  
-- **Groq gemma2-9b-it** – For low-latency instruction following  
+- **Groq llama-3.3-70b-versatile** – For complex reasoning and comprehension  
+- **Groq llama-3.1-8b-instant** – For low-latency instruction following  
 
 **Justification**:  
 Groq LLMs offer ultra-fast execution, which is essential for real-time analytics and a smooth user experience. For cost-sensitive or open environments, GPT-3.5 and Mistral are strong fallback options.
@@ -113,6 +113,25 @@ Groq LLMs offer ultra-fast execution, which is essential for real-time analytics
 Natural language → LLM interpretation → Pandas code generation → Result display
 
 ---
+
+## 🚀 New Feature: Retrieval-Augmented Generation (RAG)
+
+The application now supports answering questions from external PDF documents using a RAG pipeline.
+
+### Workflow
+
+- Load PDF documents
+- Convert text into embeddings
+- Store embeddings in a VectorStoreIndex
+- Retrieve the most relevant chunks
+- Generate answers using Groq's `llama-3.3-70b-versatile`
+
+### Example Questions
+
+- What are the major risks mentioned in the market report?
+- Which company has the highest revenue growth?
+- Compare AlphaCloud and NeuralWorks.
+- What market indicators are discussed?
 
 ## 🚀 Future Extensions
 
